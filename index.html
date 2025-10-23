@@ -1,115 +1,197 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel='stylesheet' type='text/css' href='estilos.css'>
-    <script src='main.js'></script>
-    <title>Tienda Escolar y Oficina</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EscolaShop - Tienda Escolar</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  <style>
+    :root {
+      --primary-color: #4A90E2;
+      --secondary-color: #50C878;
+      --accent-color: #FFB347;
+    }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8f9fa; }
+    .navbar-brand { font-weight: bold; color: var(--primary-color) !important; }
+    .hero-section { background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; padding: 60px 0; margin-bottom: 30px; }
+    .product-card { transition: transform .3s, box-shadow .3s; border: none; box-shadow: 0 2px 8px rgba(0,0,0,.1); }
+    .product-card:hover { transform: translateY(-5px); box-shadow: 0 4px 16px rgba(0,0,0,.15); }
+    .product-img { height: 200px; display: flex; align-items: center; justify-content: center; font-size: 4rem; }
+    .category-badge { cursor: pointer; transition: all .3s; }
+    .category-badge.active, .category-badge:hover { background-color: var(--primary-color) !important; color: white !important; }
+    .order-summary { background: #f8f9fa; border-radius: 10px; padding: 20px; }
+  </style>
 </head>
 <body>
-    
-    <h1>Bienvenido a mi Página!</h1>
-    <p>Esta pagina se realizo solo con HTML y CSS, subido a github</p>
-    <header style="border: 2px solid black; text-align: center; background-color: #f0f0f0; padding: 20px;">
-        <h1 style="color:blue;" >Tienda Escolar & Oficina</h1>
-        <p>&#128515;Encuentra lo que necesitas para el estudio y trabajo.</p>
-    </header>
 
-    
-    <a href="#Servicios" class="btn">Ir a Servicios</a><br>
-    <a href="#Contacto" class="btn">Ir a Contacto</a>
-    <table border="0" width="100%">
-        <tr>
-            <!--columna 1: texto-->
-            <td width="33%" align="center" valign="top" style="border-right: 1px solid gray;">
-                <h1>Sección de Útiles Escolares</h1>
-                <p>Aquí encontrarás muchos artículos de interés para la escuela entre otros!</p>
-                <img src="img/utiles-escolares.jpg" alt="Utiles Escolares" width="300"><br>
-            </td> 
-           <!--Columna 3: imagen--> 
-           <td width="33%" align="center" valign="top" style="border-right: 1px solid gray;">
-                <h2>Útiles Escolares</h2>
-                <ul style="text-align: left;">
-                    <li>Mochilas</li>
-                    <li>Cuadernos</li>
-                    <li>Crayones</li>
-                    <li>Marcadores</li>
-                    <li>Libros</li>
-                    <li>Reglas</li>
-                    <li>Lapices</li>
-                </ul>
-                
-                <div class="card">
-                    <h3>Combo Escolar</h3>
-                    <img src="img/combo.jpg" alt="Combo escolar" width="50%">
-                    <p>Incluye cuaderno, lápiz, crayones, mochila y más.</p>
-                    <p><strong>Q75.00</strong></p>
-                    </div>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="#"><i class="bi bi-bag-check-fill me-2"></i>EscolaShop</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-center">
+          <li class="nav-item"><a class="nav-link" href="#" onclick="showProducts()"><i class="bi bi-shop me-1"></i>Productos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" onclick="showOrders()"><i class="bi bi-receipt me-1"></i>Mis Pedidos</a></li>
+          <li class="nav-item ms-3">
+            <button class="btn btn-outline-primary position-relative" onclick="toggleCart()">
+              <i class="bi bi-cart3"></i>
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cartCount">0</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
-           </td>
-           <!--Columna 2: imagen-->
-            <td width="33%" align="center">
-                <iframe width="250" height="435"
-                    src="https://www.youtube.com/embed/wsE68wHlDe0" 
-                    title="Ver video de útiles escolares para niños"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen>
-                </iframe>
-                    
-            </td> 
-        </tr>
-    </table>
+  <!-- Hero -->
+  <div class="hero-section text-center">
+    <h1 class="display-5 fw-bold">¡Todo para el regreso a clases!</h1>
+    <p class="lead">Encuentra los mejores útiles escolares al mejor precio</p>
+  </div>
 
-<table border="1" width="100%">
-  <tr>
-    <td width="50%" align="center">
-        <h1>Sección de Artículos de Oficina</h1>
-        <p>Aquí encontrarás muchos artículos de interés para la oficina entre otros!</p>
-        <img src="img/articulos-de-oficina.jpg" alt="Utiles Escolares" width="300"><br>
-    </td>
-    <td width="50%" align="center" valign="top">
-            <h2>Artículos de Oficina</h2>   
-                <ul style="text-align: left;">
-                    <li>Engrapadoras </li>
-                    <li>Carpetas</li>
-                    <li>Lapiceros</li>
-                    <li>Memorias usb</li>
-                    <li>Resaltadores</li>
-                    <li>Agendas</li>
-                    <li>Clips</li>
-                    <li>Calculadoras</li>
-                </ul>
-    </td>
-  </tr>
-</table>
+  <!-- Productos -->
+  <div class="container mb-5" id="productsSection">
+    <div class="row mb-4">
+      <div class="col-12">
+        <h5 class="mb-3">Categorías</h5>
+        <div class="d-flex flex-wrap gap-2">
+          <span class="badge bg-secondary category-badge active" onclick="filterCategory('all')">Todas</span>
+          <span class="badge bg-secondary category-badge" onclick="filterCategory('Escritura')">Escritura</span>
+          <span class="badge bg-secondary category-badge" onclick="filterCategory('Arte')">Arte</span>
+          <span class="badge bg-secondary category-badge" onclick="filterCategory('Organización')">Organización</span>
+          <span class="badge bg-secondary category-badge" onclick="filterCategory('Papelería')">Papelería</span>
+        </div>
+      </div>
+    </div>
+    <div class="row g-4" id="productsGrid"></div>
+  </div>
 
- <section id="Servicios">
-    <h2 align="center">Sección de Servicios </h2>
-    <p>Ofrecemos:</p>
-    <ul>
-      <li>Impresiones en blanco y negro o a color</li>
-      <li>Copias rápidas</li>
-      <li>Escaneo de documentos</li>
-      <li>Investigaciones</li>
-      <li>Mantenimiento de computadoras</li>
-      <li>Mantenimiento de impresoras</li>
-    </ul>
-  </section>
+  <!-- Pedidos -->
+  <div class="container my-5 d-none" id="ordersSection">
+    <h2 class="mb-4"><i class="bi bi-receipt me-2"></i>Mis Pedidos</h2>
+    <div id="ordersList"></div>
+  </div>
 
-  <section id="Contacto">
-    <h2 align="center">Contáctanos</h2>
-    <p>Email: contacto@ofiescolar.com</p>
-    <p>Teléfono: (502) 1234-5678</p>
-    <p>Dirección: Palín, Escuintla</p>
-  </section>
-    <hr>
+  <!-- Carrito -->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas">
+    <div class="offcanvas-header">
+      <h5><i class="bi bi-cart3 me-2"></i>Carrito</h5>
+      <button class="btn-close" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div id="cartItems"></div>
+      <div id="cartSummary" class="mt-4"></div>
+    </div>
+  </div>
 
-    <footer style="text-align: center; background-color:rgb(14, 14, 15); padding: 10px; margin-top: 20px;">
-        <p>&copy; 2025 Escolar&Oficina. Todos los derechos reservados.</p>
-    </footer>
-        
-    
+  <!-- Modal Detalle Producto -->
+  <div class="modal fade" id="productModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header"><h5 id="productModalTitle"></h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+        <div class="modal-body" id="productModalBody"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Checkout -->
+  <div class="modal fade" id="checkoutModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header"><h5>Finalizar Compra</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+        <div class="modal-body">
+          <form id="checkoutForm">
+            <div class="mb-3">
+              <label class="form-label">Dirección de Envío</label>
+              <textarea class="form-control" rows="3" required></textarea>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Método de Pago</label>
+              <select class="form-select" required>
+                <option value="">Seleccionar...</option>
+                <option>Efectivo contra entrega</option>
+                <option>Tarjeta de crédito</option>
+                <option>Transferencia bancaria</option>
+              </select>
+            </div>
+            <div id="checkoutSummary" class="order-summary mb-3"></div>
+            <button type="submit" class="btn btn-success w-100"><i class="bi bi-check-circle me-2"></i>Confirmar Pedido</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const products = [
+      { id: 1, name: 'Cuaderno Universitario', price: 25, category: 'Papelería', icon: '📔', description: 'Cuaderno de 100 hojas rayadas.', stock: 50 },
+      { id: 2, name: 'Set de Bolígrafos', price: 15, category: 'Escritura', icon: '🖊️', description: 'Pack de 5 bolígrafos.', stock: 100 },
+      { id: 3, name: 'Lápices HB (12 unidades)', price: 12, category: 'Escritura', icon: '✏️', description: 'Caja con 12 lápices HB.', stock: 80 },
+      { id: 4, name: 'Borrador Blanco', price: 3, category: 'Escritura', icon: '🧽', description: 'Borrador de larga duración.', stock: 150 },
+      { id: 5, name: 'Sacapuntas Metálico', price: 8, category: 'Escritura', icon: '✂️', description: 'Sacapuntas doble metálico.', stock: 90 },
+      { id: 6, name: 'Colores de Madera x24', price: 45, category: 'Arte', icon: '🎨', description: 'Set de 24 colores de madera.', stock: 40 },
+      { id: 7, name: 'Marcadores Permanentes', price: 20, category: 'Escritura', icon: '🖍️', description: 'Set de 6 marcadores permanentes.', stock: 60 },
+      { id: 8, name: 'Tijeras Escolares', price: 18, category: 'Arte', icon: '✂️', description: 'Tijeras seguras para niños.', stock: 70 },
+      { id: 9, name: 'Pegamento Líquido', price: 10, category: 'Arte', icon: '🧴', description: 'Pegamento blanco 250ml.', stock: 85 },
+      { id: 10, name: 'Carpeta con Anillos', price: 35, category: 'Organización', icon: '📁', description: 'Carpeta de 3 anillos.', stock: 45 },
+      { id: 11, name: 'Regla de 30cm', price: 5, category: 'Arte', icon: '📏', description: 'Regla plástica transparente.', stock: 120 },
+      { id: 12, name: 'Mochila Escolar', price: 150, category: 'Organización', icon: '🎒', description: 'Mochila resistente con compartimentos.', stock: 25 }
+    ];
+
+    let cart = [], orders = [], currentFilter = 'all';
+
+    function renderProducts() {
+      const grid = document.getElementById('productsGrid');
+      const filtered = currentFilter === 'all' ? products : products.filter(p => p.category === currentFilter);
+      grid.innerHTML = filtered.map(p => `
+        <div class="col-md-6 col-lg-3">
+          <div class="card product-card">
+            <div class="product-img">${p.icon}</div>
+            <div class="card-body">
+              <h6>${p.name}</h6>
+              <p class="text-muted small">${p.category}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="h5 text-primary">Q${p.price.toFixed(2)}</span>
+                <small class="text-muted">Stock: ${p.stock}</small>
+              </div>
+              <div class="d-grid gap-2 mt-3">
+                <button class="btn btn-sm btn-outline-primary" onclick="showProductDetail(${p.id})"><i class="bi bi-eye me-1"></i>Ver</button>
+                <button class="btn btn-sm btn-primary" onclick="addToCart(${p.id})"><i class="bi bi-cart-plus me-1"></i>Agregar</button>
+              </div>
+            </div>
+          </div>
+        </div>`).join('');
+    }
+
+    function filterCategory(cat){currentFilter=cat;document.querySelectorAll('.category-badge').forEach(b=>b.classList.remove('active'));event.target.classList.add('active');renderProducts();}
+    function showProductDetail(id){const p=products.find(x=>x.id===id);document.getElementById('productModalTitle').textContent=p.name;document.getElementById('productModalBody').innerHTML=`
+      <div class="row"><div class="col-md-4 text-center" style="font-size:8rem;">${p.icon}</div>
+      <div class="col-md-8"><p><b>Categoría:</b> ${p.category}</p><p>${p.description}</p>
+      <p><b>Precio:</b> <span class='text-primary h4'>Q${p.price.toFixed(2)}</span></p>
+      <button class="btn btn-primary" onclick="addToCart(${p.id});bootstrap.Modal.getInstance(document.getElementById('productModal')).hide();">
+      <i class='bi bi-cart-plus me-2'></i>Agregar al carrito</button></div></div>`;new bootstrap.Modal('#productModal').show();}
+    function addToCart(id){const p=products.find(x=>x.id===id);const c=cart.find(i=>i.id===id);if(c){if(c.quantity<p.stock)c.quantity++;}else cart.push({...p,quantity:1});updateCart();showToast('Producto agregado');}
+    function removeFromCart(id){cart=cart.filter(i=>i.id!==id);updateCart();}
+    function updateQuantity(id,c){const i=cart.find(i=>i.id===id);if(i){i.quantity+=c;if(i.quantity<=0)removeFromCart(id);updateCart();}}
+    function updateCart(){document.getElementById('cartCount').textContent=cart.reduce((a,b)=>a+b.quantity,0);const items=document.getElementById('cartItems');const s=document.getElementById('cartSummary');
+      if(!cart.length){items.innerHTML='<div class="text-center text-muted py-5"><i class="bi bi-cart-x" style="font-size:3rem;"></i><p>Carrito vacío</p></div>';s.innerHTML='';return;}
+      items.innerHTML=cart.map(i=>`<div class='d-flex justify-content-between mb-2'><div><b>${i.name}</b><br><small>Q${i.price.toFixed(2)}</small></div><div><button class='btn btn-sm btn-outline-secondary' onclick='updateQuantity(${i.id},-1)'>-</button> ${i.quantity} <button class='btn btn-sm btn-outline-secondary' onclick='updateQuantity(${i.id},1)'>+</button></div></div>`).join('');
+      const t=cart.reduce((a,b)=>a+b.price*b.quantity,0);s.innerHTML=`<div class='order-summary'><div class='d-flex justify-content-between'><span>Total:</span><b>Q${t.toFixed(2)}</b></div><button class='btn btn-success w-100 mt-2' onclick='openCheckout()'><i class="bi bi-credit-card me-2"></i>Pagar</button></div>`;}
+    function toggleCart(){new bootstrap.Offcanvas('#cartOffcanvas').show();}
+    function openCheckout(){const t=cart.reduce((a,b)=>a+b.price*b.quantity,0);document.getElementById('checkoutSummary').innerHTML=`<h6>Resumen</h6><p>${cart.length} productos</p><b>Total: Q${t.toFixed(2)}</b>`;new bootstrap.Modal('#checkoutModal').show();}
+    document.getElementById('checkoutForm').addEventListener('submit',e=>{e.preventDefault();orders.push({id:orders.length+1,date:new Date().toLocaleString(),items:[...cart],total:cart.reduce((a,b)=>a+b.price*b.quantity,0)});cart=[];updateCart();bootstrap.Modal.getInstance('#checkoutModal').hide();showOrders();showToast('Compra realizada');});
+    function showOrders(){document.getElementById('productsSection').classList.add('d-none');document.getElementById('ordersSection').classList.remove('d-none');const list=document.getElementById('ordersList');
+      if(!orders.length){list.innerHTML='<div class="text-center text-muted py-5"><i class="bi bi-inbox" style="font-size:3rem;"></i><p>Sin pedidos</p></div>';return;}
+      list.innerHTML=orders.map(o=>`<div class='card mb-3'><div class='card-header'><b>Pedido #${o.id}</b> <small class='text-muted ms-3'>${o.date}</small></div><div class='card-body'><table class='table table-sm'><tbody>${o.items.map(i=>`<tr><td>${i.name}</td><td>${i.quantity}</td><td>Q${i.price.toFixed(2)}</td></tr>`).join('')}</tbody></table><div class='text-end'><b>Total: Q${o.total.toFixed(2)}</b></div></div></div>`).join('');}
+    function showProducts(){document.getElementById('productsSection').classList.remove('d-none');document.getElementById('ordersSection').classList.add('d-none');}
+    function showToast(msg){const t=document.createElement('div');t.className='position-fixed bottom-0 end-0 p-3';t.style.zIndex='9999';t.innerHTML=`<div class='toast show'><div class='toast-body bg-success text-white'><i class='bi bi-check-circle me-2'></i>${msg}</div></div>`;document.body.appendChild(t);setTimeout(()=>t.remove(),2500);}
+    renderProducts();
+  </script>
 </body>
 </html>
+
